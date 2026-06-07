@@ -1,0 +1,42 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    environment:
+      NEO4J_AUTH: none
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+  cassandra:
+    image: cassandra:5.0
+    container_name: cassandra-db
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+    
+  app:
+    build: .
+    container_name: night_city_app
+    volumes:
+      - .:/app
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mongodb
+      - neo4j
+      - cassandra
+
+volumes:
+  mongo_data:
+  neo4j_data:
+  cassandra_data:

@@ -18,12 +18,18 @@ services:
 
   cassandra:
     image: cassandra:5.0
-    container_name: cassandra-db
+    container_name: cassandra
     ports:
       - "9042:9042"
     volumes:
       - cassandra_data:/var/lib/cassandra
     
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+
   app:
     build: .
     container_name: night_city_app
@@ -35,8 +41,10 @@ services:
       - mongodb
       - neo4j
       - cassandra
+      - redis
 
 volumes:
   mongo_data:
   neo4j_data:
   cassandra_data:
+  redis_data:

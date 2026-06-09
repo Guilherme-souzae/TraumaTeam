@@ -1,10 +1,12 @@
 from database_mongodb import DatabaseMongo
 from database_neo4j import DatabaseNeo4j
 from database_cassandra import DatabaseCassandra
+from database_redis import DatabaseRedis
 
 dbmongo = DatabaseMongo()
 dbneo4j = DatabaseNeo4j()
 dbcassandra = DatabaseCassandra()
+dbredis = DatabaseRedis()
 
 # ── Helpers de exibição ───────────────────────────────────────────────────────
 
